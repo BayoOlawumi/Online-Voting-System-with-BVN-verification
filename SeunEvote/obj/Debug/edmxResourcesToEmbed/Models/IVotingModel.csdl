@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IVotingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Adminee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Encoded" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contestant">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nickname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Party" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ElectionId" Type="Int32" Nullable="false" />
+    <Property Name="ProfilePicturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PartyPartyId" Type="Int32" Nullable="false" />
+    <Property Name="Count" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Election" Relationship="Self.FK_ElectionContestant" FromRole="Contestants" ToRole="Elections" />
+    <NavigationProperty Name="Party1" Relationship="Self.FK_PartyContestant" FromRole="Contestants" ToRole="Parties" />
+  </EntityType>
+  <EntityType Name="ElectionDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ElectionStartTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ElectionStopTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Election">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Post" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NoOfContestants" Type="Int32" Nullable="false" />
+    <Property Name="Done" Type="Boolean" />
+    <NavigationProperty Name="Contestants" Relationship="Self.FK_ElectionContestant" FromRole="Elections" ToRole="Contestants" />
+  </EntityType>
+  <EntityType Name="Party">
+    <Key>
+      <PropertyRef Name="PartyId" />
+    </Key>
+    <Property Name="PartyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PartyName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="LogoPath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Contestants" Relationship="Self.FK_PartyContestant" FromRole="Parties" ToRole="Contestants" />
+  </EntityType>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="VoterId" />
+    </Key>
+    <Property Name="VoterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="President" Type="Int32" />
+    <Property Name="VicePresident" Type="Int32" />
+    <Property Name="FinancialSecretary" Type="Int32" />
+    <Property Name="VotedId" Type="Int32" Nullable="false" />
+    <Property Name="Treasurer" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Voted">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HasVoted" Type="Boolean" Nullable="false" />
+    <Property Name="Encoded" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BVN" Type="String" Unicode="false" FixedLength="false" MaxLength="Max" Nullable="false" />
+    <Property Name="PHONE_NUMBER" Type="String" Unicode="true" FixedLength="false" MaxLength="Max" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VotersDet">
+    <Key>
+      <PropertyRef Name="VoterId" />
+    </Key>
+    <Property Name="VoterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Middlename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="StateOfOrigin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LocalGovt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NOKName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NOKPhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Passport" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CertificateOfOrigin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BVN" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_ElectionContestant">
+    <End Role="Elections" Type="Self.Election" Multiplicity="1" />
+    <End Role="Contestants" Type="Self.Contestant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Elections">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contestants">
+        <PropertyRef Name="ElectionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PartyContestant">
+    <End Role="Parties" Type="Self.Party" Multiplicity="1" />
+    <End Role="Contestants" Type="Self.Contestant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parties">
+        <PropertyRef Name="PartyId" />
+      </Principal>
+      <Dependent Role="Contestants">
+        <PropertyRef Name="PartyPartyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IVotingModelEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Adminees" EntityType="Self.Adminee" />
+    <EntitySet Name="Contestants" EntityType="Self.Contestant" />
+    <EntitySet Name="ElectionDetails" EntityType="Self.ElectionDetail" />
+    <EntitySet Name="Elections" EntityType="Self.Election" />
+    <EntitySet Name="Parties" EntityType="Self.Party" />
+    <EntitySet Name="Reports" EntityType="Self.Report" />
+    <EntitySet Name="Voteds" EntityType="Self.Voted" />
+    <EntitySet Name="VotersDets" EntityType="Self.VotersDet" />
+    <AssociationSet Name="FK_ElectionContestant" Association="Self.FK_ElectionContestant">
+      <End Role="Elections" EntitySet="Elections" />
+      <End Role="Contestants" EntitySet="Contestants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PartyContestant" Association="Self.FK_PartyContestant">
+      <End Role="Parties" EntitySet="Parties" />
+      <End Role="Contestants" EntitySet="Contestants" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

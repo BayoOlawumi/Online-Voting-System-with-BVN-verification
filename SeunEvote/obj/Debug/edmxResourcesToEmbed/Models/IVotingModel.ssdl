@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IVotingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Adminees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Encoded" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contestants">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nickname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Party" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ElectionId" Type="int" Nullable="false" />
+    <Property Name="ProfilePicturePath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PartyPartyId" Type="int" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ElectionDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ElectionStartTime" Type="datetime" Nullable="false" />
+    <Property Name="ElectionStopTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Elections">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Post" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NoOfContestants" Type="int" Nullable="false" />
+    <Property Name="Done" Type="bit" />
+  </EntityType>
+  <EntityType Name="Parties">
+    <Key>
+      <PropertyRef Name="PartyId" />
+    </Key>
+    <Property Name="PartyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartyName" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="LogoPath" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reports">
+    <Key>
+      <PropertyRef Name="VoterId" />
+    </Key>
+    <Property Name="VoterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="President" Type="int" />
+    <Property Name="VicePresident" Type="int" />
+    <Property Name="FinancialSecretary" Type="int" />
+    <Property Name="VotedId" Type="int" Nullable="false" />
+    <Property Name="Treasurer" Type="int" />
+  </EntityType>
+  <EntityType Name="Voteds">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="HasVoted" Type="bit" Nullable="false" />
+    <Property Name="Encoded" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BVN" Type="varchar(max)" Nullable="false" />
+    <Property Name="PHONE NUMBER" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VotersDets">
+    <Key>
+      <PropertyRef Name="VoterId" />
+    </Key>
+    <Property Name="VoterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Middlename" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Lastname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="StateOfOrigin" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LocalGovt" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="BVN" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="NOKName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NOKPhoneNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Passport" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CertificateOfOrigin" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ElectionContestant">
+    <End Role="Elections" Type="Self.Elections" Multiplicity="1" />
+    <End Role="Contestants" Type="Self.Contestants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Elections">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contestants">
+        <PropertyRef Name="ElectionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PartyContestant">
+    <End Role="Parties" Type="Self.Parties" Multiplicity="1" />
+    <End Role="Contestants" Type="Self.Contestants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parties">
+        <PropertyRef Name="PartyId" />
+      </Principal>
+      <Dependent Role="Contestants">
+        <PropertyRef Name="PartyPartyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IVotingModelStoreContainer">
+    <EntitySet Name="Adminees" EntityType="Self.Adminees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contestants" EntityType="Self.Contestants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ElectionDetails" EntityType="Self.ElectionDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Elections" EntityType="Self.Elections" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Parties" EntityType="Self.Parties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Voteds" EntityType="Self.Voteds" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VotersDets" EntityType="Self.VotersDets" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ElectionContestant" Association="Self.FK_ElectionContestant">
+      <End Role="Elections" EntitySet="Elections" />
+      <End Role="Contestants" EntitySet="Contestants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PartyContestant" Association="Self.FK_PartyContestant">
+      <End Role="Parties" EntitySet="Parties" />
+      <End Role="Contestants" EntitySet="Contestants" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

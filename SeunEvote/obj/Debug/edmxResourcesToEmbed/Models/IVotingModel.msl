@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IVotingModelStoreContainer" CdmEntityContainer="IVotingModelEntities">
+    <EntitySetMapping Name="Adminees">
+      <EntityTypeMapping TypeName="IVotingModel.Adminee">
+        <MappingFragment StoreEntitySet="Adminees">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Encoded" ColumnName="Encoded" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contestants">
+      <EntityTypeMapping TypeName="IVotingModel.Contestant">
+        <MappingFragment StoreEntitySet="Contestants">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+          <ScalarProperty Name="Party" ColumnName="Party" />
+          <ScalarProperty Name="ElectionId" ColumnName="ElectionId" />
+          <ScalarProperty Name="ProfilePicturePath" ColumnName="ProfilePicturePath" />
+          <ScalarProperty Name="PartyPartyId" ColumnName="PartyPartyId" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ElectionDetails">
+      <EntityTypeMapping TypeName="IVotingModel.ElectionDetail">
+        <MappingFragment StoreEntitySet="ElectionDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ElectionStartTime" ColumnName="ElectionStartTime" />
+          <ScalarProperty Name="ElectionStopTime" ColumnName="ElectionStopTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Elections">
+      <EntityTypeMapping TypeName="IVotingModel.Election">
+        <MappingFragment StoreEntitySet="Elections">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Post" ColumnName="Post" />
+          <ScalarProperty Name="NoOfContestants" ColumnName="NoOfContestants" />
+          <ScalarProperty Name="Done" ColumnName="Done" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parties">
+      <EntityTypeMapping TypeName="IVotingModel.Party">
+        <MappingFragment StoreEntitySet="Parties">
+          <ScalarProperty Name="PartyId" ColumnName="PartyId" />
+          <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+          <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="IVotingModel.Report">
+        <MappingFragment StoreEntitySet="Reports">
+          <ScalarProperty Name="VoterId" ColumnName="VoterId" />
+          <ScalarProperty Name="President" ColumnName="President" />
+          <ScalarProperty Name="VicePresident" ColumnName="VicePresident" />
+          <ScalarProperty Name="FinancialSecretary" ColumnName="FinancialSecretary" />
+          <ScalarProperty Name="VotedId" ColumnName="VotedId" />
+          <ScalarProperty Name="Treasurer" ColumnName="Treasurer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Voteds">
+      <EntityTypeMapping TypeName="IVotingModel.Voted">
+        <MappingFragment StoreEntitySet="Voteds">
+          <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE NUMBER" />
+          <ScalarProperty Name="BVN" ColumnName="BVN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="HasVoted" ColumnName="HasVoted" />
+          <ScalarProperty Name="Encoded" ColumnName="Encoded" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VotersDets">
+      <EntityTypeMapping TypeName="IVotingModel.VotersDet">
+        <MappingFragment StoreEntitySet="VotersDets">
+          <ScalarProperty Name="BVN" ColumnName="BVN" />
+          <ScalarProperty Name="VoterId" ColumnName="VoterId" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="StateOfOrigin" ColumnName="StateOfOrigin" />
+          <ScalarProperty Name="LocalGovt" ColumnName="LocalGovt" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="NOKName" ColumnName="NOKName" />
+          <ScalarProperty Name="NOKPhoneNo" ColumnName="NOKPhoneNo" />
+          <ScalarProperty Name="Passport" ColumnName="Passport" />
+          <ScalarProperty Name="CertificateOfOrigin" ColumnName="CertificateOfOrigin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

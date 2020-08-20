@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IVotingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adminees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Encoded" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contestants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nickname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Party" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ElectionId" Type="int" Nullable="false" />
+          <Property Name="ProfilePicturePath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PartyPartyId" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ElectionDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ElectionStartTime" Type="datetime" Nullable="false" />
+          <Property Name="ElectionStopTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Elections">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Post" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NoOfContestants" Type="int" Nullable="false" />
+          <Property Name="Done" Type="bit" />
+        </EntityType>
+        <EntityType Name="Parties">
+          <Key>
+            <PropertyRef Name="PartyId" />
+          </Key>
+          <Property Name="PartyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartyName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="LogoPath" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="VoterId" />
+          </Key>
+          <Property Name="VoterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="President" Type="int" />
+          <Property Name="VicePresident" Type="int" />
+          <Property Name="FinancialSecretary" Type="int" />
+          <Property Name="VotedId" Type="int" Nullable="false" />
+          <Property Name="Treasurer" Type="int" />
+        </EntityType>
+        <EntityType Name="Voteds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="HasVoted" Type="bit" Nullable="false" />
+          <Property Name="Encoded" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BVN" Type="varchar(max)" Nullable="false" />
+          <Property Name="PHONE NUMBER" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VotersDets">
+          <Key>
+            <PropertyRef Name="VoterId" />
+          </Key>
+          <Property Name="VoterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Middlename" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="StateOfOrigin" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LocalGovt" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="BVN" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="NOKName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NOKPhoneNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Passport" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CertificateOfOrigin" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ElectionContestant">
+          <End Role="Elections" Type="Self.Elections" Multiplicity="1" />
+          <End Role="Contestants" Type="Self.Contestants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elections">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contestants">
+              <PropertyRef Name="ElectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyContestant">
+          <End Role="Parties" Type="Self.Parties" Multiplicity="1" />
+          <End Role="Contestants" Type="Self.Contestants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parties">
+              <PropertyRef Name="PartyId" />
+            </Principal>
+            <Dependent Role="Contestants">
+              <PropertyRef Name="PartyPartyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IVotingModelStoreContainer">
+          <EntitySet Name="Adminees" EntityType="Self.Adminees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contestants" EntityType="Self.Contestants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ElectionDetails" EntityType="Self.ElectionDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Elections" EntityType="Self.Elections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parties" EntityType="Self.Parties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Voteds" EntityType="Self.Voteds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VotersDets" EntityType="Self.VotersDets" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ElectionContestant" Association="Self.FK_ElectionContestant">
+            <End Role="Elections" EntitySet="Elections" />
+            <End Role="Contestants" EntitySet="Contestants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyContestant" Association="Self.FK_PartyContestant">
+            <End Role="Parties" EntitySet="Parties" />
+            <End Role="Contestants" EntitySet="Contestants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IVotingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adminee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Encoded" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contestant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nickname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Party" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ElectionId" Type="Int32" Nullable="false" />
+          <Property Name="ProfilePicturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PartyPartyId" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Election" Relationship="Self.FK_ElectionContestant" FromRole="Contestants" ToRole="Elections" />
+          <NavigationProperty Name="Party1" Relationship="Self.FK_PartyContestant" FromRole="Contestants" ToRole="Parties" />
+        </EntityType>
+        <EntityType Name="ElectionDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ElectionStartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ElectionStopTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Election">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Post" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NoOfContestants" Type="Int32" Nullable="false" />
+          <Property Name="Done" Type="Boolean" />
+          <NavigationProperty Name="Contestants" Relationship="Self.FK_ElectionContestant" FromRole="Elections" ToRole="Contestants" />
+        </EntityType>
+        <EntityType Name="Party">
+          <Key>
+            <PropertyRef Name="PartyId" />
+          </Key>
+          <Property Name="PartyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartyName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LogoPath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contestants" Relationship="Self.FK_PartyContestant" FromRole="Parties" ToRole="Contestants" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="VoterId" />
+          </Key>
+          <Property Name="VoterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="President" Type="Int32" />
+          <Property Name="VicePresident" Type="Int32" />
+          <Property Name="FinancialSecretary" Type="Int32" />
+          <Property Name="VotedId" Type="Int32" Nullable="false" />
+          <Property Name="Treasurer" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Voted">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HasVoted" Type="Boolean" Nullable="false" />
+          <Property Name="Encoded" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BVN" Type="String" Unicode="false" FixedLength="false" MaxLength="Max" Nullable="false" />
+          <Property Name="PHONE_NUMBER" Type="String" Unicode="true" FixedLength="false" MaxLength="Max" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VotersDet">
+          <Key>
+            <PropertyRef Name="VoterId" />
+          </Key>
+          <Property Name="VoterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Middlename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="StateOfOrigin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LocalGovt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NOKName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NOKPhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passport" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CertificateOfOrigin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BVN" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_ElectionContestant">
+          <End Role="Elections" Type="Self.Election" Multiplicity="1" />
+          <End Role="Contestants" Type="Self.Contestant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Elections">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contestants">
+              <PropertyRef Name="ElectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyContestant">
+          <End Role="Parties" Type="Self.Party" Multiplicity="1" />
+          <End Role="Contestants" Type="Self.Contestant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parties">
+              <PropertyRef Name="PartyId" />
+            </Principal>
+            <Dependent Role="Contestants">
+              <PropertyRef Name="PartyPartyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IVotingModelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adminees" EntityType="Self.Adminee" />
+          <EntitySet Name="Contestants" EntityType="Self.Contestant" />
+          <EntitySet Name="ElectionDetails" EntityType="Self.ElectionDetail" />
+          <EntitySet Name="Elections" EntityType="Self.Election" />
+          <EntitySet Name="Parties" EntityType="Self.Party" />
+          <EntitySet Name="Reports" EntityType="Self.Report" />
+          <EntitySet Name="Voteds" EntityType="Self.Voted" />
+          <EntitySet Name="VotersDets" EntityType="Self.VotersDet" />
+          <AssociationSet Name="FK_ElectionContestant" Association="Self.FK_ElectionContestant">
+            <End Role="Elections" EntitySet="Elections" />
+            <End Role="Contestants" EntitySet="Contestants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyContestant" Association="Self.FK_PartyContestant">
+            <End Role="Parties" EntitySet="Parties" />
+            <End Role="Contestants" EntitySet="Contestants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IVotingModelStoreContainer" CdmEntityContainer="IVotingModelEntities">
+          <EntitySetMapping Name="Adminees">
+            <EntityTypeMapping TypeName="IVotingModel.Adminee">
+              <MappingFragment StoreEntitySet="Adminees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Encoded" ColumnName="Encoded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contestants">
+            <EntityTypeMapping TypeName="IVotingModel.Contestant">
+              <MappingFragment StoreEntitySet="Contestants">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="Party" ColumnName="Party" />
+                <ScalarProperty Name="ElectionId" ColumnName="ElectionId" />
+                <ScalarProperty Name="ProfilePicturePath" ColumnName="ProfilePicturePath" />
+                <ScalarProperty Name="PartyPartyId" ColumnName="PartyPartyId" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ElectionDetails">
+            <EntityTypeMapping TypeName="IVotingModel.ElectionDetail">
+              <MappingFragment StoreEntitySet="ElectionDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ElectionStartTime" ColumnName="ElectionStartTime" />
+                <ScalarProperty Name="ElectionStopTime" ColumnName="ElectionStopTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Elections">
+            <EntityTypeMapping TypeName="IVotingModel.Election">
+              <MappingFragment StoreEntitySet="Elections">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="NoOfContestants" ColumnName="NoOfContestants" />
+                <ScalarProperty Name="Done" ColumnName="Done" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parties">
+            <EntityTypeMapping TypeName="IVotingModel.Party">
+              <MappingFragment StoreEntitySet="Parties">
+                <ScalarProperty Name="PartyId" ColumnName="PartyId" />
+                <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+                <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="IVotingModel.Report">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="VoterId" ColumnName="VoterId" />
+                <ScalarProperty Name="President" ColumnName="President" />
+                <ScalarProperty Name="VicePresident" ColumnName="VicePresident" />
+                <ScalarProperty Name="FinancialSecretary" ColumnName="FinancialSecretary" />
+                <ScalarProperty Name="VotedId" ColumnName="VotedId" />
+                <ScalarProperty Name="Treasurer" ColumnName="Treasurer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voteds">
+            <EntityTypeMapping TypeName="IVotingModel.Voted">
+              <MappingFragment StoreEntitySet="Voteds">
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE NUMBER" />
+                <ScalarProperty Name="BVN" ColumnName="BVN" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="HasVoted" ColumnName="HasVoted" />
+                <ScalarProperty Name="Encoded" ColumnName="Encoded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VotersDets">
+            <EntityTypeMapping TypeName="IVotingModel.VotersDet">
+              <MappingFragment StoreEntitySet="VotersDets">
+                <ScalarProperty Name="BVN" ColumnName="BVN" />
+                <ScalarProperty Name="VoterId" ColumnName="VoterId" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="StateOfOrigin" ColumnName="StateOfOrigin" />
+                <ScalarProperty Name="LocalGovt" ColumnName="LocalGovt" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="NOKName" ColumnName="NOKName" />
+                <ScalarProperty Name="NOKPhoneNo" ColumnName="NOKPhoneNo" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="CertificateOfOrigin" ColumnName="CertificateOfOrigin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
