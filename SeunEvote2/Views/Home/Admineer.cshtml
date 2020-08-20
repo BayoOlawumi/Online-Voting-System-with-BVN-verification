@@ -1,0 +1,83 @@
+﻿@model SeunEvote.Models.Adminee
+
+@{
+    ViewBag.Title = "Admineer";
+    Layout = "~/Views/Shared/voters.cshtml";
+}
+
+<h2>Admineer</h2>
+@using (Html.BeginForm("AdminLogger", "Home", FormMethod.Post))
+{
+
+
+    <br>
+    <div class="container-fluid">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <center><p class="justHere1"> THIS PAGE IS ONLY ALLOWED TO BE ACCESSED BY THE COUNTRY'S ELECTORAL CERTIFIED OFFICIALS,ALL OTHER ILLEGAL ATTEMPTS WILL BE TREATED IN ACCORDANCE WITH THE LAW. </p></center>
+
+                <style>
+                    .design {
+                        font-family:Simplex TechnicBold;
+                    }
+
+                    .justHere1 {
+                        font-size: 19px;
+                        letter-spacing: 2px;
+                    }
+                </style>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <center><img src="~/Content/Images/Peoples-Budget.jpg" alt="Vote 1" width="1024" height="180"></center>
+                    </div>
+                    <div class="item">
+                        <center><img src="~/Content/Images/party2.png" alt="Vote 2" width="1024" height="180"></center>
+                    </div>
+
+                    <div class="item">
+                        <center><img src="~/Content/Images/kisspng-voting-ballot-election-clip-art-vote-png-hd-5aa1fb7fd80168.2501528415205651198848.jpg" alt="Vote 3" width="1024" height="180"></center>
+                    </div>
+                   
+                </div>
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+</div>
+        <br />
+    </div>
+
+
+        <tr>
+            <td>@Html.LabelFor(a => a.Surname)</td>
+            <td>@Html.TextBoxFor(a => a.Surname)</td>
+            <td>@Html.ValidationMessageFor(a => a.Surname)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.Password)</td>
+            <td>@Html.PasswordFor(a => a.Password)</td>
+            <td>@Html.ValidationMessageFor(a => a.Password)</td>
+        </tr>
+
+
+
+        <div class="jumbotron">
+            <td><input type="submit" name="login" value="Log in " /></td>
+        </div>
+
+
+        }
+

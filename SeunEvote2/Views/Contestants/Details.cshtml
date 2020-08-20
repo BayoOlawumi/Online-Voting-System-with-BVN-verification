@@ -1,0 +1,52 @@
+﻿@model SeunEvote.Models.Contestant
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Contestant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nickname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nickname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Party)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Party)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfilePicturePath)
+        </dt>
+
+        <dd>
+             <img src="~/Content/Contestants/@Url.Content(Model.ProfilePicturePath)" width="70" height="50" />
+          
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Election.Post)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Election.Post)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

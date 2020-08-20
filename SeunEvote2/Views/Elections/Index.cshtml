@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SeunEvote.Models.Election>
+
+@{
+    ViewBag.Title = "Elections";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    Elections:
+    <span style="color:orangered">
+        @if (ViewBag.Reporter != null)
+        {
+            @ViewBag.Reporter
+        }
+    </span>
+</h2>
+<p>
+     @Html.ActionLink("Create New", "Create")
+    <div style="background-color:azure; border-radius:10px;margin-left:80%; margin-bottom:6px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-weight:bolder;padding:5px 2px 3px 3px;text-align:center; width:130px;" />
+        @Html.ActionLink("Election Date", "Index","ElectionDetails") 
+    </div>  
+      
+<p>
+   
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Post)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoOfContestants)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Post)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfContestants)
+        </td>
+        <td>
+           
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })|
+            @Html.ActionLink("Contestants", "Details","contestants", new { id = item.Id })
+            
+        </td>
+    </tr>
+}
+
+</table>
+

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<SeunEvote.Models.VotersDet>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eligible Voters</h2>
+
+<p>
+    @Html.ActionLink("Add New", "Create")
+</p>
+<hr />
+@if (ViewBag.Password != null)
+{
+    <span>The login password for <b>@ViewBag.Surname</b> is <em style="color:indianred">@ViewBag.Password</em></span>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Middlename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StateOfOrigin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalGovt)
+        </th>
+      
+      
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Middlename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StateOfOrigin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocalGovt)
+        </td>
+        
+       
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.VoterId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.VoterId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.VoterId })
+        </td>
+    </tr>
+}
+   
+
+</table>

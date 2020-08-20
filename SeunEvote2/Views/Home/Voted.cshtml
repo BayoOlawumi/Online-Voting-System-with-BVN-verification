@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Voted";
+    Layout = "~/Views/Shared/voters.cshtml";
+}
+<style>
+    ul li {
+        display: inline;
+        float: left;
+        padding: inherit;
+    }
+
+    ul .major {
+        border-bottom: 1px ridge cadetblue;
+        border-width: 10px;
+    }
+
+    ul {
+        display: flex;
+        list-style: none;
+        width: 100%;
+    }
+
+    .checker {
+        margin-left: 30%;
+        font-size: 23px;
+    }
+
+</style>
+
+<h2>Selected Candidates</h2>
+
+@using (Html.BeginForm("Submission", "Home", FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+<div class="container body-content thumbnail">
+    <div class="body-content">
+    
+            <ul>
+                @foreach (var SelectedCons in @ViewBag.Reportee)
+                {
+                    <li>
+                        <header style="color:magenta;font-size:20px;border-bottom:3px groove cyan">@SelectedCons.Election.Post</header> 
+                        <div id="checker">
+                            @SelectedCons.Nickname
+                            <img src="~/Content/Images/vote.png" width="40" height="50" />
+                        </div>
+
+                        <img src="~/Content/Contestants/@Url.Content(SelectedCons.ProfilePicturePath)"
+                             width="230" height="200" style="padding:7px 7px 5px 10px; border-radius:20%" />
+                        <b style="color:darkcyan">@SelectedCons.Party1.PartyName</b>
+                        <img src="~/Content/Parties/@Url.Content(SelectedCons.Party1.LogoPath)"
+                             width="30" height="30" style="padding:3px 2px 2px 2px" />
+                        <input type="hidden" name="@SelectedCons.Election.Post" value="@SelectedCons.Id" />
+                    </li>
+                    <hr />
+                }
+            </ul>
+       
+
+    </div>
+</div>
+<button>@Html.ActionLink("Print", "Print")</button>
+<input type="submit" name="save" value="Submit Votes" style="background-color:darkmagenta; border-radius:10px;margin-left:80%; margin-bottom:6px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-weight:bolder;padding:5px 2px 3px 3px" />
+
+}

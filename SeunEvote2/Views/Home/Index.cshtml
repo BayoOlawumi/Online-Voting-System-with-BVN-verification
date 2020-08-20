@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "HomePage";
+    Layout = "~/Views/Shared/voters.cshtml";
+}
+<div class="jumbotron design body-content text-center">
+    <h2></h2>
+    <p class="justHere1">  WECOLME TO ONLINE VOTING SYSTEM 2018</p>
+    <p class="justHere"> This is a system designed to create transparent,easier and more effective election throughout the country, enabling conviniency and better efficiency in the nation's electoral administration.</p>
+
+    <style>
+        .design {
+            font-family:Simplex TechnicBold
+        }
+
+        .justHere1 {
+            font-size: 40px;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <style>
+        .design {
+            font-family:CityBlueprint
+        }
+        .justHere {
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+    </style>
+</div>
+    <h3 style="color:indigo">
+        @if (ViewBag.report != null)
+        {
+            @ViewBag.report
+        }
+    </h3>
+
+  
+
+
+    <br>
+    <div class="container-fluid">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <center><img src="~/Content/Images/img1.jpg" alt="Vote 1" width="740" height="493"></center>
+                </div>
+                <div class="item">
+                    <center><img src="~/Content/Images/img2.jpg" alt="Vote 2" width="740" height="493"></center>
+                </div>
+
+                <div class="item">
+                    <center><img src="~/Content/Images/img3.jpg" alt="Vote 3" width="740" height="493"></center>
+                </div>
+
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <br />
+
+
+
+
+
+
+
+        <div class="jumbotron">
+
+            <button>@Html.ActionLink("Admin", "Admineer")</button>
+
+            <button>@Html.ActionLink("Voter", "HomePage")</button>
+        </div>
+    </div>
+
+

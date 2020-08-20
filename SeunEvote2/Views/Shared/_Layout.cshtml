@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - E-voting 2018</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+
+
+
+    <br>
+    <div class="container-fluid">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <center><img src="~/Content/Images/5139407571_1c81d07a8c_b.jpg" alt="Vote 1" width="994" height="220"></center>
+                </div>
+                <div class="item">
+                    <center><img src="~/Content/Images/images (2).jpg" alt="Vote 2" width="994" height="220"></center>
+                </div>
+
+                <div class="item">
+                    <center><img src="~/Content/Images/img8.jpg" alt="Vote 2" width="994" height="220"></center>
+                </div>
+
+                <div class="item">
+                    <center><img src="~/Content/Images/images (1).jpg"alt="Vote 3" width="994" height="220"></center>
+                </div>
+
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+       </div>
+         </div>
+        <br />
+
+
+
+
+       
+        <style>
+            .nav navbar-nav li {
+                border-radius: 0.5px;
+                border-left: 0.5px ridge cadetblue;
+            }
+        </style>
+</head>
+<body>
+    
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("E-Voting", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                
+                    <li>@Html.ActionLink("Voters", "Index", "VotersDets", new { area = "" }, new { @class = "jumbotron" })</li>
+                    <li>@Html.ActionLink("Elections", "Index", "elections", new { area = "" }, new { @class = "jumbotron" })</li>
+                    <li>@Html.ActionLink("Contestants", "Index", "contestants", new { area = "" }, new { @class = "jumbotron" })</li>
+                    <li>@Html.ActionLink("Party", "Index", "parties", new { area = "" }, new { @class = "jumbotron" })</li>
+                    <li>@Html.ActionLink("Result", "Result", "elections", new { area = "" }, new { @class = "jumbotron" })</li>\
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb">
+        @if (Session["AdminName"] != null && Session["Role"] != null)
+        {
+            <b style="font-size:20px;">@Session["Role"]:<em style="color:mediumblue; font-size:20px;">@Session["AdminName"].ToString()</em> </b>
+        }
+    </div>
+    <div class="jumbotron body-content text-justified"> 
+       
+        @RenderBody()
+        <hr />
+        <footer>
+            <div class="panel-footer" style="text-align:center">&copy; @DateTime.Now.Year - OLUWASEUN </div>
+        </footer>
+    </div>
+    <script src="~/Scripts/App/artificial.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

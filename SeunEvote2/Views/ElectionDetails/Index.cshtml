@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SeunEvote.Models.ElectionDetail>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Election Period</h2>
+@foreach (var item in Model)
+{
+    <div>
+        @Html.ActionLink("Adjust", "Edit", new { id = item.Id }) |
+
+    </div>
+}
+<br /><br />
+<table class="alert-danger" style="background-color:white;padding:5px 5px 5px 5px ;margin-left:60px" >
+
+    <tr style="margin-left:40px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:20px;color:black;background-color:none">
+            <td style="border-bottom:4px groove cyan; padding:inherit">
+               Starting Time
+            </td>
+
+            <td style="border-bottom:4px groove cyan;padding:inherit">
+                Stopping Time
+            </td>
+    </tr>
+
+    <tr style="color:green;font-weight:bolder;margin-left:40px">
+        @foreach (var tem in Model)
+        {
+
+            <td style="border-right:4px groove cyan;padding:inherit">
+             @Html.DisplayFor(modelItem => tem.ElectionStartTime)
+            </td>
+
+            <td style="padding:inherit"> 
+                @Html.DisplayFor(modelItem => tem.ElectionStopTime)
+            </td>
+
+        }
+    </tr>
+
+</table>
+

@@ -1,0 +1,105 @@
+﻿@model SeunEvote.Models.VotersDet
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VotersDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Middlename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Middlename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StateOfOrigin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StateOfOrigin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocalGovt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocalGovt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOKName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOKName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOKPhoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOKPhoneNo)
+        </dd>
+        <dt>
+            Password
+        </dt>
+
+        <dd>
+            @if (ViewBag.Password != null)
+            {
+                @ViewBag.Password
+
+            }
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VoterId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

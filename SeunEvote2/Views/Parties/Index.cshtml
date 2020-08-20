@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SeunEvote.Models.Party>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Party List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PartyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LogoPath)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartyName)
+        </td>
+        <td>
+            <img src="~/Content/Parties/@Url.Content(item.LogoPath)" alt="Alternate Text" width="70" height="50" />
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PartyId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PartyId })
+        </td>
+    </tr>
+}
+
+</table>

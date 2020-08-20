@@ -1,0 +1,67 @@
+﻿
+
+@model SeunEvote.Models.Voted
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/voters.cshtml";
+}
+
+    <h2>Login</h2>
+
+
+    <h3 style="color:orangered">
+
+
+
+        <div class="item active">
+            <left><img src="~/Content/Images/Community Help.png"></left>
+        </div>
+
+            @if (ViewBag.report != null)
+            {
+                @ViewBag.report
+            }
+</h3>
+
+
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+    {
+
+
+        <tr>
+            <td>@Html.LabelFor(a => a.Surname)</td>
+            <td>@Html.TextBoxFor(a => a.Surname)</td>
+            <td>@Html.ValidationMessageFor(a => a.Surname)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.Password)</td>
+            <td>@Html.PasswordFor(a => a.Password)</td>
+            <td>@Html.ValidationMessageFor(a => a.Password)</td>
+        </tr>
+        <table class="table" style="position:center">
+            <tr>
+                <td>@Html.LabelFor(a => a.BVN)</td>
+                <td>
+                    @Html.PasswordFor(a => a.BVN)
+                </td>
+                <td>@Html.ValidationMessageFor(a => a.BVN)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(a => a.PHONE_NUMBER)</td>
+                <td>@Html.TextBoxFor(a => a.PHONE_NUMBER)</td>
+                <td>@Html.ValidationMessageFor(a => a.PHONE_NUMBER)</td>
+            </tr>
+
+            <tr>
+                <td><input type="submit" name="login" value="Log in " /></td>
+            </tr>
+        </table>
+
+
+        <img id="AjaxLoader" src="~/Content/Images/vote.png" style="display:none" />
+        <div id="LoginFailure"></div>
+    }
+
+
+
